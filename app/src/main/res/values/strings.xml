@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">TheMovieApp</string>
+    <string name="error_msg">Sorry! Couldn\'t fetch Movies.</string>
+    <string name="btn_retry">Retry</string>
+    <string name="welcome">Welcome.</string>
+    <string name="content">Millions of movies, TV shows and people to discover. Explore now.</string>
 </resources>
