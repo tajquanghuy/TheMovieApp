@@ -17,7 +17,7 @@ abstract class ViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(HomeViewModel::class)
-    abstract fun provideUserViewModel(viewModel: HomeViewModel): ViewModel
+    abstract fun provideHomeViewModel(viewModel: HomeViewModel): ViewModel
 
     @Binds
     @IntoMap

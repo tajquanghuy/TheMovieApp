@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
+        <import type="android.view.View" />
+
         <variable
             name="viewModel"
             type="com.pigllet.themovieapp.presentation.home_movie.HomeViewModel" />
@@ -25,9 +28,9 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txtTitle"
             android:layout_width="match_parent"
-            android:layout_marginTop="@dimen/_10sdp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:text="@string/welcome"
             android:textColor="@color/white"
             android:textSize="@dimen/_20ssp"
@@ -44,12 +47,12 @@
             app:layout_constraintTop_toTopOf="@id/imageBg" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerMyOrders"
+            android:id="@+id/list_movie"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/_20sdp"
             android:background="@color/white"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:visibility="@{!viewModel.isLoading()  &amp;&amp; !viewModel.isEmpty() ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/imageBg" />
 

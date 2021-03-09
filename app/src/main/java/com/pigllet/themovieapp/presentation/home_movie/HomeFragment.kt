@@ -5,19 +5,34 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
+import androidx.recyclerview.widget.GridLayoutManager
 import com.pigllet.themovieapp.R
 import com.pigllet.themovieapp.databinding.FragmentHomeBinding
+import com.pigllet.themovieapp.domain.Movie
+import dagger.android.support.DaggerFragment
+import javax.inject.Inject
 
-class HomeFragment : Fragment() {
-    lateinit var binding: FragmentHomeBinding
+class HomeFragment : DaggerFragment() {
+
+    private lateinit var binding: FragmentHomeBinding
+
+    @Inject
+    lateinit var viewModel: HomeViewModel
 
     companion object {
         fun newInstance() = HomeFragment()
     }
 
-    private lateinit var viewModel: HomeViewModel
+    private val movieAdapter: MovieListAdapter by lazy {
+        MovieListAdapter(movieClick)
+    }
+
+    val movieClick = object : MovieListAdapter.MovieClick {
+        override fun onMovieClick(movie: Movie) {
+        }
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,10 +47,27 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setUpAdapter()
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        //viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
-        // TODO: Use the ViewModel
+        binding.lifecycleOwner = this
+        binding.viewModel = viewModel
+        viewModel.listMovie.observe(this, {
+            movieAdapter.setListUser(it)
+        })
+        viewModel.loadUserList()
     }
+
+    fun setUpAdapter() {
+        binding.listMovie.apply {
+            adapter = movieAdapter
+            layoutManager = GridLayoutManager(context, 3)
+        }
+    }
+
 
 }
