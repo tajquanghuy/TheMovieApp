@@ -3,8 +3,8 @@ package com.pigllet.themovieapp.domain
 import java.io.Serializable
 
 data class Movie(
-    var user_id: Long,
+    var id: Long,
     var release_date: String,
-    var display_name: String,
-    var profile_image: String
+    var title: String,
+    var poster_path: String
 ) : Serializable

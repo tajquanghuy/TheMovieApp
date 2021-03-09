@@ -6,7 +6,7 @@
         <import type="android.view.View" />
         <variable
             name="viewModel"
-            type="com.pigllet.themovieapp.domain.Movie" />
+            type="com.pigllet.themovieapp.domain.models.ResultsItem" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -28,7 +28,7 @@
                 android:scaleType="centerCrop"
                 app:layout_constraintBottom_toTopOf="@id/txtMovieName"
                 app:layout_constraintTop_toTopOf="parent"
-                app:loadAvatar="@{viewModel.profile_image}" />
+                app:loadAvatar="@{viewModel.posterPath}" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txtMovieName"
@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_20sdp"
                 android:layout_marginBottom="@dimen/_10sdp"
-                android:text="@{viewModel.display_name}"
+                android:text="@{viewModel.title}"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_20ssp"
                 app:layout_constraintBottom_toTopOf="@id/txtDateTime" />
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_20sdp"
                 android:layout_marginBottom="@dimen/_20sdp"
-                android:text="@{viewModel.release_date}"
+                android:text="@{viewModel.releaseDate}"
                 android:textSize="@dimen/_18ssp"
                 app:layout_constraintBottom_toBottomOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
