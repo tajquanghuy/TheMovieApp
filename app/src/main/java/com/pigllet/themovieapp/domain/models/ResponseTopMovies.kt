@@ -1,6 +1,9 @@
 package com.pigllet.themovieapp.domain.models
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
+import java.io.Serializable
 
 data class ResponseTopMovies(
 
@@ -17,6 +20,7 @@ data class ResponseTopMovies(
     val totalResults: Int? = null
 )
 
+@Parcelize
 data class ResultsItem(
 
     @field:SerializedName("overview")
@@ -60,4 +64,4 @@ data class ResultsItem(
 
     @field:SerializedName("vote_count")
     val voteCount: Int? = null
-)
+) : Serializable, Parcelable

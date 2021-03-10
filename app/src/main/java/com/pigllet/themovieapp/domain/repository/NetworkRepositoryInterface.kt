@@ -7,7 +7,7 @@ import io.reactivex.Single
 
 
 interface NetworkRepositoryInterface {
-    fun getListMovie(): Single<ResponsePopularMovie>
+    fun getMovieDetail(): Single<ResultsItem>
 
-    fun getListMoviee(): Single<ResultsItem>
+    fun getListMoviee(): Single<ResponseTopMovies>
 }

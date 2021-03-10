@@ -4,4 +4,7 @@
     <string name="btn_retry">Retry</string>
     <string name="welcome">Welcome.</string>
     <string name="content">Millions of movies, TV shows and people to discover. Explore now.</string>
+    <string name="date">Realease Date: </string>
+    <string name="average">/10</string>
+    <string name="summary">Summary</string>
 </resources>

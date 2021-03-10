@@ -3,18 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <import type="android.view.View" />
+        
         <variable
             name="viewModel"
             type="com.pigllet.themovieapp.domain.models.ResultsItem" />
     </data>
 
     <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="@dimen/_50sdp"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_200sdp"
+        android:layout_marginTop="@dimen/_10sdp"
         android:elevation="@dimen/_50sdp"
-        app:cardCornerRadius="@dimen/_10sdp">
+        android:padding="@dimen/_20sdp"
+        app:cardCornerRadius="@dimen/_5sdp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -23,10 +26,9 @@
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imgAvatar"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginBottom="@dimen/_20sdp"
-                android:scaleType="centerCrop"
-                app:layout_constraintBottom_toTopOf="@id/txtMovieName"
+                android:layout_height="@dimen/_150sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:scaleType="center"
                 app:layout_constraintTop_toTopOf="parent"
                 app:loadAvatar="@{viewModel.posterPath}" />
 
@@ -34,21 +36,21 @@
                 android:id="@+id/txtMovieName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginBottom="@dimen/_10sdp"
+                android:gravity="center"
                 android:text="@{viewModel.title}"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_20ssp"
-                app:layout_constraintBottom_toTopOf="@id/txtDateTime" />
+                android:textSize="@dimen/_9ssp"
+                app:layout_constraintBottom_toTopOf="@id/txtDateTime"
+                app:layout_constraintTop_toBottomOf="@id/imgAvatar" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txtDateTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginBottom="@dimen/_20sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:gravity="center"
                 android:text="@{viewModel.releaseDate}"
-                android:textSize="@dimen/_18ssp"
+                android:textSize="@dimen/_7ssp"
                 app:layout_constraintBottom_toBottomOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 

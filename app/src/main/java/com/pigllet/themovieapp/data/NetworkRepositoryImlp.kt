@@ -14,11 +14,11 @@ import javax.inject.Inject
 class NetworkRepositoryImlp @Inject constructor(val movieService: MovieService) :
     NetworkRepositoryInterface {
 
-    override fun getListMovie(): Single<ResponsePopularMovie> {
+    override fun getMovieDetail(): Single<ResultsItem> {
         return movieService.getPopularMovie(API_KEY, APP_LANGUAGE,1)
     }
 
-    override fun getListMoviee(): Single<ResultsItem> {
+    override fun getListMoviee(): Single<ResponseTopMovies> {
         return movieService.getPopularMoviee(API_KEY, APP_LANGUAGE,1)
     }
 

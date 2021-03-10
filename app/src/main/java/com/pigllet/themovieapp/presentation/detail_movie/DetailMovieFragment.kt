@@ -5,29 +5,65 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import com.pigllet.themovieapp.R
-import com.pigllet.themovieapp.domain.Movie
+import com.bumptech.glide.Glide
+import com.pigllet.themovieapp.databinding.FragmentDetailMovieBinding
+import com.pigllet.themovieapp.domain.models.ResultsItem
+import com.pigllet.themovieapp.utils.IMAGE_URL_API
+import kotlinx.android.synthetic.main.fragment_detail_movie.*
+import javax.inject.Inject
 
 class DetailMovieFragment : Fragment() {
 
+    @Inject
+    lateinit var viewModel: DetailMovieViewModel
+
+    private lateinit var binding: FragmentDetailMovieBinding
+
+
     companion object {
-        fun newInstance(movie: Movie) = DetailMovieFragment()
+        private const val KEY_MOVIE = "KEY_MOVIE"
+        fun newInstance(movie: ResultsItem): DetailMovieFragment {
+            val bundle = Bundle()
+            bundle.putSerializable(KEY_MOVIE, movie)
+            val fragment = DetailMovieFragment().apply {
+                arguments = bundle
+            }
+            return fragment
+        }
     }
 
-    private lateinit var viewModel: DetailMovieViewModel
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.lifecycleOwner = this
+        binding.mToolbar.setTitle("Movie Details")
+        binding.imgBack.setOnClickListener(View.OnClickListener {
+            fragmentManager?.popBackStack()
+        })
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_detail_movie, container, false)
+        binding = FragmentDetailMovieBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        ///viewModel = ViewModelProvider(this).get(DetailMovieViewModel::class.java)
-        // TODO: Use the ViewModel
+        arguments?.let {
+            var movie = it.getSerializable(KEY_MOVIE) as ResultsItem
+            movie?.let {
+                binding.txtTitle.setText(movie.title)
+                binding.txtContent.setText(movie.overview)
+                binding.dateTime.setText(movie.releaseDate)
+                Glide.with(requireContext()).load(IMAGE_URL_API + movie.backdropPath)
+                    .into(imgAvatar)
+            }
+        }
     }
+
 
 }

@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.basecleandaggerrx.rx.SchedulersProvider
 import com.pigllet.themovieapp.domain.Movie
+import com.pigllet.themovieapp.domain.models.ResultsItem
 import com.pigllet.themovieapp.presentation.usecase.LoadMovieUseCase
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
@@ -17,28 +18,22 @@ constructor(
 ) : ViewModel() {
     private val compositeDisposable = CompositeDisposable()
 
-    private var _listMovie = MutableLiveData<List<Movie>>()
+    private var _listMovie = MutableLiveData<List<ResultsItem>>()
     val listMovie = _listMovie
-
-    private var _listMoviee = MutableLiveData<List<Movie>>()
-    val listMoviee = _listMoviee
-
-
 
     var isLoading = MutableLiveData<Boolean>()
     var isEmpty = false
 
-    fun loadUserList() {
+    fun loadMovieList() {
         isLoading.value = true
         loadMovieUseCase.executee(Unit)
             .subscribeOn(schedulers.io())
             .observeOn(schedulers.main())
             .subscribe(
                 { respone ->
-                    _listMovie.value = respone?.results
+                    _listMovie.value = respone?.results!!
                     isLoading.value = false
-                    if (respone.movies.size > 0) isEmpty = false else isEmpty = true
-                    var a : Int = 1
+                    if (respone.results.size > 0) isEmpty = false else isEmpty = true
                 },
                 { error ->
                     isLoading.value = false
@@ -49,11 +44,9 @@ constructor(
                 compositeDisposable.add(it)
             }
     }
+
     fun getListMovie(){
-
     }
-
-
 
     override fun onCleared() {
         super.onCleared()

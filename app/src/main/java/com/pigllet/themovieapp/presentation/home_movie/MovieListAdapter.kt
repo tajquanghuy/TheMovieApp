@@ -44,6 +44,6 @@ class MovieListAdapter(val listener: MovieClick) :
 
 
     interface MovieClick {
-        fun onMovieClick(movie: ResultsItem)
+        fun onMovieClick(movie: ResultsItem){}
     }
 }

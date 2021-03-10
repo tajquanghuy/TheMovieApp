@@ -9,7 +9,8 @@ import androidx.lifecycle.observe
 import androidx.recyclerview.widget.GridLayoutManager
 import com.pigllet.themovieapp.R
 import com.pigllet.themovieapp.databinding.FragmentHomeBinding
-import com.pigllet.themovieapp.domain.Movie
+import com.pigllet.themovieapp.domain.models.ResultsItem
+import com.pigllet.themovieapp.presentation.MainActivity
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -29,7 +30,8 @@ class HomeFragment : DaggerFragment() {
     }
 
     val movieClick = object : MovieListAdapter.MovieClick {
-        override fun onMovieClick(movie: Movie) {
+        override fun onMovieClick(movie: ResultsItem) {
+            detailMovie(movie)
         }
 
     }
@@ -59,7 +61,7 @@ class HomeFragment : DaggerFragment() {
         viewModel.listMovie.observe(this, {
             movieAdapter.setListUser(it)
         })
-        viewModel.loadUserList()
+        viewModel.loadMovieList()
     }
 
     fun setUpAdapter() {
@@ -69,5 +71,8 @@ class HomeFragment : DaggerFragment() {
         }
     }
 
+    fun detailMovie(movie: ResultsItem) {
+        (activity as MainActivity).showDetailMovie(movie)
+    }
 
 }
